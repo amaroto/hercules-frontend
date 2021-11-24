@@ -1,7 +1,8 @@
 import * as React from 'react';
 import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
 import Dashboard from './components/dashboard/Dashboard';
+import SignInSide from './components/sign-in-side/SignInSide';
+import { Routes, Route, Link } from "react-router-dom";
 
 function Copyright() {
   return (
@@ -12,7 +13,10 @@ function Copyright() {
 }
 
 export default function App() {
-  return (
-    <Dashboard />
+  return (  
+    <Routes>
+      <Route path="/" element={<Dashboard />} />
+      <Route path="login" element={<SignInSide />} />
+    </Routes>
   );
 }
