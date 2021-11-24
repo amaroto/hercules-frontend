@@ -16,12 +16,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 function Copyright(props: any) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
+      {'© Hercules'} {new Date().getFullYear()} {' - All rights reserved'}
     </Typography>
   );
 }

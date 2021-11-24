@@ -25,7 +25,7 @@ import Orders from './Orders';
 function Copyright(props: any) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © Hercules Frontend'} {new Date().getFullYear()}
+      {'© Hercules'} {new Date().getFullYear()} {' - All rights reserved'}
     </Typography>
   );
 }
