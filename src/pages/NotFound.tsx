@@ -13,7 +13,7 @@ function NotFound() {
   return (
     <>
       <Helmet>
-        <title>{`Adiona - ${t("error")}: ${t("notFound")}`}</title>
+        <title>{`H - ${t("error")}: ${t("notFound")}`}</title>
       </Helmet>
       <Box
         sx={{

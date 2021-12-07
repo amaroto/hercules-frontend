@@ -13,7 +13,9 @@ function AuthorizationRequired() {
   return (
     <>
       <Helmet>
-        <title>{`Adiona - ${t("error")}: ${t("authorizationRequired")}`}</title>
+        <title>{`Hercules - ${t("error")}: ${t(
+          "authorizationRequired"
+        )}`}</title>
       </Helmet>
       <Box
         sx={{

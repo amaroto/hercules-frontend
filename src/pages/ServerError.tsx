@@ -13,7 +13,7 @@ function ServerError() {
   return (
     <>
       <Helmet>
-        <title>{`Adiona - ${t("error")}: ${t("serverError")}`}</title>
+        <title>{`Hercules - ${t("error")}: ${t("serverError")}`}</title>
       </Helmet>
       <Box
         sx={{
