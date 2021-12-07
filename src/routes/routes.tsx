@@ -3,7 +3,7 @@ import { Suspense, lazy } from "react";
 import LoadingScreen from "../components/LoadingScreen";
 import GuestGuard from "../components/GuestGuard";
 import AuthGuard from "../components/AuthGuard";
-import DashboardLayout from "../pages/main/Main";
+import MainLayout from "../components/main/Main";
 
 const Loadable = (Component: any) => (props: any) =>
   (
@@ -16,7 +16,7 @@ const Loadable = (Component: any) => (props: any) =>
 const Login = Loadable(lazy(() => import("../pages/authentication/Login")));
 
 // Dashboard
-const Overview = Loadable(lazy(() => import("../pages/main/Main")));
+const Dashboard = Loadable(lazy(() => import("../pages/dashboard/Dashboard")));
 
 // Error pages
 const AuthorizationRequired = Loadable(
@@ -39,16 +39,14 @@ const routes = [
     breadcrumb: null,
     element: (
       <AuthGuard>
-        <DashboardLayout />
+        <MainLayout />
       </AuthGuard>
     ),
     children: [
-      /*
       {
-        path: 'overview',
-        element: <Overview />,
-      }
-      */
+        path: "dashboard",
+        element: <Dashboard />,
+      },
     ],
   },
   {

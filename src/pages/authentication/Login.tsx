@@ -55,13 +55,15 @@ function Login() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url(https://source.unsplash.com/random)",
+            backgroundImage:
+              "url(https://estaticos.muyhistoria.es/media/cache/760x570_thumb/uploads/images/pyr/5d31b2fb5bafe8b761c0dce9/hercules-2_0.jpg)",
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
                 ? t.palette.grey[50]
                 : t.palette.grey[900],
             backgroundSize: "cover",
+            opacity: 0.7,
             backgroundPosition: "center",
           }}
         />
