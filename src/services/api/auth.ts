@@ -1,18 +1,42 @@
 import decode from "jwt-decode";
 import isAfter from "date-fns/isAfter";
 import axios from "axios";
+import client from "./apiClient";
 
 class AuthApi {
-  async login(token: string): Promise<string> {
+  async login(email: string, password: string): Promise<string> {
     try {
-      const response = await axios.get(
+      const response = await axios.post(
         `${process.env.REACT_APP_API_BASE_URL}/api/login`,
         {
-          headers: { Authorization: `Bearer ${token}` },
+          email: email,
+          password: password,
+          device: navigator.userAgent,
         }
       );
 
       return response.data.token;
+    } catch (err) {
+      console.error("[Auth Api]: ", err);
+      return "";
+    }
+  }
+
+  async profile(): Promise<any> {
+    try {
+      const response = await client.get("api/profile");
+
+      const user = response.data;
+
+      const userResponse = {
+        id: user.id,
+        username: user.username,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        permissions: user.permissions,
+        email: user.email,
+        active: user.active,
+      };
     } catch (err) {
       console.error("[Auth Api]: ", err);
       return "";
@@ -37,32 +61,6 @@ class AuthApi {
     const rightNow = new Date();
 
     return isAfter(rightNow, expirationDate);
-  }
-
-  me(accessToken: string): Promise<User> {
-    return new Promise((resolve, reject) => {
-      try {
-        if (this.isExpiredToken(accessToken)) {
-          reject(new Error("Token expired"));
-          return;
-        }
-
-        const user: User = decode(accessToken);
-
-        resolve({
-          id: user.id,
-          username: user.username,
-          firstname: user.firstname,
-          lastname: user.lastname,
-          permissions: user.permissions,
-          email: user.email,
-          active: user.active,
-        });
-      } catch (err) {
-        console.error("[Auth Api]: ", err);
-        reject(new Error("Internal server error"));
-      }
-    });
   }
 }
 

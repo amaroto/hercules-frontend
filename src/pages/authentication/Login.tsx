@@ -13,6 +13,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+import useAuth from "../../hooks/useAuth";
+
 function Copyright(props: any) {
   return (
     <Typography
@@ -28,15 +30,19 @@ function Copyright(props: any) {
 
 const theme = createTheme();
 
-export default function Login() {
+function Login() {
+  const auth = useAuth();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    const email = data.get("email") ? data.get("email") : "";
+    const password = data.get("password") ? data.get("password") : "";
+
+    if (email && password) {
+      auth.login("admin@admin.com", "password");
+    }
   };
 
   return (
@@ -133,3 +139,5 @@ export default function Login() {
     </ThemeProvider>
   );
 }
+
+export default Login;

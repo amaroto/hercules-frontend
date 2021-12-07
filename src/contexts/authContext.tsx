@@ -9,7 +9,7 @@ interface State {
 }
 
 interface AuthContextValue extends State {
-  login: (token: string) => Promise<void>;
+  login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -90,7 +90,7 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
         const accessToken = window.localStorage.getItem("accessToken");
 
         if (accessToken) {
-          const user = await authApi.me(accessToken);
+          const user = await authApi.profile();
 
           dispatch({
             type: "INITIALIZE",
@@ -123,11 +123,12 @@ export const AuthProvider: FC<AuthProviderProps> = (props) => {
     initialize();
   }, []);
 
-  const login = async (token: string): Promise<void> => {
-    const responseLogin = await authApi.login(token);
-    const user = await authApi.me(responseLogin);
+  const login = async (email: string, password: string): Promise<void> => {
+    const responseLogin = await authApi.login(email, password);
 
     localStorage.setItem("accessToken", responseLogin);
+
+    const user = await authApi.profile();
 
     dispatch({
       type: "LOGIN",
